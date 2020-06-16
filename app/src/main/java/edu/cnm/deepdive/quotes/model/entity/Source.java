@@ -6,7 +6,9 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = @Index(value = "name", unique = true))
+@Entity(
+    indices = @Index(value = "name", unique = true)
+)
 public class Source {
 
   @PrimaryKey(autoGenerate = true)
@@ -21,11 +23,16 @@ public class Source {
     return id;
   }
 
-  public void setID(long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
   public String getName() {
     return name;
   }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
 }
