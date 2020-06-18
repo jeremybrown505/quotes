@@ -2,13 +2,13 @@ package edu.cnm.deepdive.quotes.controller;
 
 import android.os.Bundle;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import edu.cnm.deepdive.quotes.R;
 import edu.cnm.deepdive.quotes.viewmodel.MainViewModel;
 
