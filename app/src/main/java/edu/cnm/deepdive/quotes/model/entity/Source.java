@@ -43,7 +43,8 @@ public class Source {
 
   @Override
   public boolean equals(@Nullable Object obj) {
-    return (obj == this) || (obj instanceof Source && name.equalsIgnoreCase(((Source)obj).name));
+    return (obj == this)
+        || (obj instanceof Source  && name.equalsIgnoreCase(((Source) obj).name));
   }
 
   @NonNull
@@ -51,4 +52,5 @@ public class Source {
   public String toString() {
     return name;
   }
+
 }
