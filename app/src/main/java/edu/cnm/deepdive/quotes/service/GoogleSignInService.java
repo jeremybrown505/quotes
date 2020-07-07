@@ -49,10 +49,14 @@ public class GoogleSignInService {
   }
 
   public Task<GoogleSignInAccount> refresh() {
-    return client.silentSignIn(); // TODO Add listeners.
+    return client.silentSignIn()
+        .addOnSuccessListener(this::update)
+        .addOnFailureListener(this::update);
+
   }
+
   public void startSignIn(Activity activity, int requestCode) {
-    // TODO Update account & throwable.
+    update((GoogleSignInAccount) null);
     Intent intent = client.getSignInIntent();
     activity.startActivityForResult(intent, requestCode);
   }
@@ -61,20 +65,28 @@ public class GoogleSignInService {
     Task<GoogleSignInAccount> task = null;
     try {
       task = GoogleSignIn.getSignedInAccountFromIntent(data);
-      account.setValue(task.getResult(ApiException.class));
+      update(task.getResult(ApiException.class));
     } catch (ApiException e) {
-      // TODO Update throwable if necessary.
+      update(e);
     }
     return task;
   }
 
   public Task<Void> signOut() {
     return client.signOut()
-        .addOnCompleteListener((ignored) -> {/* TODO Update Account */});
+        .addOnCompleteListener((ignored) -> update((GoogleSignInAccount) null));
   }
 
-  // ToDo Add update method for account.
-  // ToDo add update method for throwable.
+  private void update(GoogleSignInAccount account) {
+    this.account.setValue(account);
+    this.throwable.setValue(null);
+  }
+
+  private void update(Throwable throwable) {
+    this.account.setValue(null);
+    this.throwable.setValue(throwable);
+  }
+
   private static class InstanceHolder {
 
     private static final GoogleSignInService INSTANCE = new GoogleSignInService();
